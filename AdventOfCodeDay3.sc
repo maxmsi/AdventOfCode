@@ -1,3 +1,29 @@
+
+
+val lowerHelper = -96
+val upperHelper = -38
+
+/*
+Task one
+ */
+val backpack=input.linesIterator.map( x => ( x.take(x.length-x.length/2), x.takeRight(x.length/2)) ).toList
+var sumPr=0
+val set = backpack.map {
+  case ((left, right)) => left.collect {
+    case x if (right.toArray.contains(x)) => x
+  }.toSet.toArray
+}.reduce(_++_).foldLeft(0){(i,c)=>if (c.isUpper) i+c.toInt+upperHelper else i+c.toInt+lowerHelper}
+
+//println(list)
+
+/*
+task 2
+ */
+val groupedBy3 = input2.linesIterator.grouped(3).map(x=>x(0).intersect(x(1)).intersect(x(2)))
+  .foldLeft(0){(i,c)=>if (c.toCharArray.head.isUpper) i+c.toCharArray.head.toInt+upperHelper else i+c.toCharArray.head.toInt+lowerHelper}
+
+println(groupedBy3)
+
 val input2="""MVWpzTTrTFNNLtssjV
             |hRJncnJCnhPCnBSbCQRhhQRPFHmsbHLzbLNHsjNNFmGGGsGF
             |lSBQJBBBBcnccnQvBnPQznfrgwlrTZfDwTfWqrrpgMpw
@@ -302,27 +328,3 @@ val input2="""MVWpzTTrTFNNLtssjV
 val input="""vJrwpWtwJgWrhcsFMMfFFhFp
             |jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
             |PmmdzqPrVvPwwTWBwg""".stripMargin
-
-val lowerHelper = -96
-val upperHelper = -38
-
-/*
-Task one
- */
-val backpack=input.linesIterator.map( x => ( x.take(x.length-x.length/2), x.takeRight(x.length/2)) ).toList
-var sumPr=0
-val set = backpack.map {
-  case ((left, right)) => left.collect {
-    case x if (right.toArray.contains(x)) => x
-  }.toSet.toArray
-}.reduce(_++_).foldLeft(0){(i,c)=>if (c.isUpper) i+c.toInt+upperHelper else i+c.toInt+lowerHelper}
-
-//println(list)
-
-/*
-task 2
- */
-val groupedBy3 = input2.linesIterator.grouped(3).map(x=>x(0).intersect(x(1)).intersect(x(2)))
-  .foldLeft(0){(i,c)=>if (c.toCharArray.head.isUpper) i+c.toCharArray.head.toInt+upperHelper else i+c.toCharArray.head.toInt+lowerHelper}
-
-println(groupedBy3)
